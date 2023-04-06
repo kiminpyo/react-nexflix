@@ -3,35 +3,7 @@ import axios from "../api/axios";
 import requests from "../api/requests";
 import "./Banner.css";
 import styled from "styled-components";
-export const Container = styled.div`
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    width: 100%;
-    height: 100vh;
-`;
-export const HomeContainer = styled.div`
-    width: 100%;
-    height: 100%;
-`;
 
-export const Iframe = styled.iframe`
-    width: 100%;
-    height: 100%;
-    z-index: -1;
-    opacity: 0.85;
-    border: none;
-
-    &::after {
-        content: "";
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100;
-    }
-`;
 const Banner = React.memo(() => {
     console.log("랜더");
     const [movie, setMovie] = useState([]);
@@ -41,6 +13,8 @@ const Banner = React.memo(() => {
     }, []);
     const bannerStyle = {
         backgroundImage: `url("https://image.tmdb.org/t/p/original/${movie.backdrop_path}")`,
+        // width: "100%",
+        // height: "100%",
         backgroundSize: "cover",
         backgroundPosition: "top center",
     };
@@ -76,7 +50,7 @@ const Banner = React.memo(() => {
         if (props.videos.results.length >= 1) {
             return (
                 <button
-                    className='banner__button play'
+                    className="banner__button play"
                     onClick={() => setIsClicked(true)}>
                     Play
                 </button>
@@ -88,23 +62,30 @@ const Banner = React.memo(() => {
 
     if (!isClicked) {
         return (
-            <header className='banner' style={bannerStyle}>
-                <div className='banner__contents'>
-                    <h1 className='banner__title'>
+            <header className="banner" style={bannerStyle}>
+                {/* <div className="banner__img">
+                    <img
+                        src={`https://image.tmdb.org/t/p/w1280/${movie.backdrop_path}`}
+                        alt="headerImage"
+                        style={bannerStyle}
+                    />
+                </div> */}
+                <div className="banner__contents">
+                    <h1 className="banner__title">
                         {movie.title || movie.name || movie.original_name}
                     </h1>
 
-                    <div className='banner__buttons'>
+                    <div className="banner__buttons">
                         {movie.title && <PlayButton props={movie} />}
-                        <button className='banner__button info'>
+                        <button className="banner__button info">
                             More Information
                         </button>
                     </div>
-                    <h1 className='banner__description'>
+                    <h1 className="banner__description">
                         {truncate(movie.overview, 100)}
                     </h1>
                 </div>
-                <div className='banner--fadeBottom' />
+                <div className="banner--fadeBottom" />
             </header>
         );
     } else {
@@ -112,12 +93,12 @@ const Banner = React.memo(() => {
             <Container>
                 <HomeContainer>
                     <Iframe
-                        width='640'
-                        height='360'
+                        width="640"
+                        height="360"
                         src={`https://www.youtube.com/embed/${movie.videos.results[0].key}?controls=0&autoplay=1&loop=1&mute=0&playlist=${movie.videos.results[0].key}`}
-                        title='YouTube video player'
-                        frameborder='0'
-                        allow='accelerometer; autoplay; fullscreen'></Iframe>{" "}
+                        title="YouTube video player"
+                        frameborder="0"
+                        allow="accelerometer; autoplay; fullscreen"></Iframe>{" "}
                 </HomeContainer>
             </Container>
         );
@@ -125,3 +106,32 @@ const Banner = React.memo(() => {
 });
 
 export default Banner;
+export const Container = styled.div`
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 100%;
+    height: 100vh;
+`;
+export const HomeContainer = styled.div`
+    width: 100%;
+    height: 100%;
+`;
+
+export const Iframe = styled.iframe`
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    opacity: 0.85;
+    border: none;
+
+    &::after {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100;
+    }
+`;

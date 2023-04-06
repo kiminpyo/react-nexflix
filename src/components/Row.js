@@ -10,7 +10,6 @@ const Row = ({ isLargeRow, title, id, fetchUrl }) => {
         fetchMovieData();
     }, []);
     const fetchMovieData = async () => {
-
         const request = await axios.get(fetchUrl);
         console.log(request.data);
         setMovies(request.data.results);
@@ -22,12 +21,12 @@ const Row = ({ isLargeRow, title, id, fetchUrl }) => {
     };
     console.log(movieSelected);
     return (
-        <section className='row'>
+        <section className="row">
             <h2>{title}</h2>
-            <div className='slider'>
-                <div className='slider__arrow-left'>
+            <div className="slider">
+                <div className="slider__arrow-left">
                     <span
-                        className='arrow'
+                        className="arrow"
                         onClick={() => {
                             document.getElementById(id).scrollLeft -=
                                 window.innerWidth;
@@ -35,7 +34,7 @@ const Row = ({ isLargeRow, title, id, fetchUrl }) => {
                         {"<"}
                     </span>
                 </div>
-                <div id={id} className='row__posters'>
+                <div id={id} className="row__posters">
                     {movies.map((item) => (
                         <img
                             onClick={() => handleClick(item)}
@@ -43,7 +42,9 @@ const Row = ({ isLargeRow, title, id, fetchUrl }) => {
                             className={`row__poster ${
                                 isLargeRow && "row__posterLarge"
                             }`}
-                            src={`https://image.tmdb.org/t/p/original/${
+                            src={`https://image.tmdb.org/t/p/${
+                                isLargeRow ? "w500" : "w500"
+                            }/${
                                 isLargeRow
                                     ? item.poster_path
                                     : item.backdrop_path
@@ -52,9 +53,9 @@ const Row = ({ isLargeRow, title, id, fetchUrl }) => {
                         />
                     ))}
                 </div>
-                <div className='slider__arrow-right'>
+                <div className="slider__arrow-right">
                     <span
-                        className='arrow'
+                        className="arrow"
                         onClick={() => {
                             document.getElementById(id).scrollLeft +=
                                 window.innerWidth;

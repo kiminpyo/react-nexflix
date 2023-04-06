@@ -7,9 +7,9 @@ import './SearchPage.css'
 const SearchPage = () => {
     const navigate = useNavigate()
     const [searchResults, setSearchResults] = useState([]);
-    console.log(useLocation());
+ const {search} = useLocation()
     const useQuery = () => {
-        return new URLSearchParams(useLocation().search);
+        return new URLSearchParams(search);
     };
     let query = useQuery();
     const searchTerm = query.get("q");
